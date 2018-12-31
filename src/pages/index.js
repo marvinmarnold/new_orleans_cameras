@@ -8,8 +8,8 @@ import SEO from '../components/seo'
 
 class IndexPage extends React.Component {
   state = {
-    lat: 51.505,
-    lng: -0.09,
+    lat: 29.951022,
+    lng: -90.081142,
     zoom: 13
   }
 
@@ -18,13 +18,15 @@ class IndexPage extends React.Component {
 
   render() {
     const position = [this.state.lat, this.state.lng]
+    const title = "New Orleans Surveillance Cameras Analysis"
+    const tags = [`new orleans`, `surveillance`, `police`, `cameras`, `monitor`, `oversight`]
+
     if (typeof window !== 'undefined') {
       return (
           <Layout>
-            <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-            <h1>Hi people</h1>
-            <p>Welcome to your new Gatsby site.</p>
-            <p>Now go build something great.</p>
+            <SEO title={title} keywords={tags} />
+            <h1>Camera Locations & 911 Calls</h1>
+            <p>Camera locations were collected by <a href="https://stopwatchingnola.org">stopwatchingnola.org</a></p>
             <Map center={position} zoom={this.state.zoom} id="mapid">
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             </Map>
@@ -35,7 +37,7 @@ class IndexPage extends React.Component {
     }
     return (
       <Layout>
-        <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+        <SEO title={title} keywords={tags} />
         <h1>Loading</h1>
 
         <Link to="/page-2/">Go to page 2</Link>
