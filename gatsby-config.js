@@ -4,6 +4,7 @@ module.exports = {
     description: `Analysis of surveillance cameras in New Orleans`,
     author: `Marvin Arnold`,
   },
+  pathPrefix: "/new_orleans_cameras",
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
