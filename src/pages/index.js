@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
 import Layout from '../components/layout'
+import { graphql } from "gatsby"
 // import Image from '../components/image'
 import SEO from '../components/seo'
 
@@ -22,6 +23,7 @@ class IndexPage extends React.Component {
     const tags = [`new orleans`, `surveillance`, `police`, `cameras`, `monitor`, `oversight`]
 
     if (typeof window !== 'undefined') {
+      const data = this.props.data.allCamerasCsv.edges
       return (
           <Layout>
             <SEO title={title} keywords={tags} />
@@ -59,3 +61,16 @@ class IndexPage extends React.Component {
 }
 
 export default IndexPage
+
+export const IndexQuery = graphql`
+  query {   
+    allCamerasCsv {
+      edges {
+        node {
+          X
+          Y
+        }
+      }
+    }
+  }
+`
