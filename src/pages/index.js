@@ -17,6 +17,18 @@ class IndexPage extends React.Component {
   componentDidMount() {
   }
 
+  renderMarker(edge) {
+    const node = edge.node
+    console.log("Adding node")
+    console.log(node)
+    const position = [node.Y, node.X]
+    return (
+      <Marker key={node.Camera} position={position}>
+        <Popup>A pretty CSS3 popup.<br />Easily customizable.</Popup>
+      </Marker>
+      )
+  }
+
   render() {
     const position = [this.state.lat, this.state.lng]
     const title = "New Orleans Surveillance Cameras Analysis"
@@ -24,6 +36,7 @@ class IndexPage extends React.Component {
 
     if (typeof window !== 'undefined') {
       const data = this.props.data.allCamerasCsv.edges
+      const markers = data.map(this.renderMarker)
       return (
           <Layout>
             <SEO title={title} keywords={tags} />
@@ -31,6 +44,7 @@ class IndexPage extends React.Component {
             <p>Camera locations were collected by <a href="https://stopwatchingnola.org">stopwatchingnola.org</a></p>
             <Map center={position} zoom={this.state.zoom} id="mapid">
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+              {markers}
             </Map>
             <Link to="/page-2/">Go to page 2</Link>
           </Layout>
@@ -67,6 +81,7 @@ export const IndexQuery = graphql`
     allCamerasCsv {
       edges {
         node {
+          Camera
           X
           Y
         }
