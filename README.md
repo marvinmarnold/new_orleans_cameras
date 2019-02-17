@@ -5,6 +5,7 @@ This project is a collaboration between the [New Orleans Office of the Independe
 
 - Many cameras from Stop Watching don't have a GPS attached
 - Only displaying the school name and not the full description
+- Looks like some calls for service have lat/lng swapped
 
 ## Generating data
 1. Download stops from data.nola.gov

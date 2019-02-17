@@ -10,7 +10,8 @@ cameras.all <- read.csv(cameras.all.csv)
 cameras.clean <- cameras.all %>% 
   filter(!is.na(X)) %>% filter(!is.na(Y)) %>%
   mutate(Lat = Y, Lng = X) %>%
-  select(Location.Code, MonitoredSchool, Lat, Lng)
+  select(Location.Code, MonitoredSchool, Lat, Lng) %>%
+  distinct(Location.Code, .keep_all = TRUE)
 
 colnames(cameras.clean) <- c("Camera", "Description", "Lat", "Lng")
 

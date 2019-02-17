@@ -10,7 +10,7 @@ import SEO from '../components/seo'
 
 const SITE_TITLE = "New Orleans Surveillance Cameras Analysis"
 const SITE_TAGS = [`new orleans`, `surveillance`, `police`, `cameras`, `monitor`, `oversight`]
-const DEFAULT_LOCATION = { lat: 29.951022, lng: -90.081142, zoom: 13 }
+const DEFAULT_LOCATION = { lat: 29.951022, lng: -90.081142, zoom: 15 }
 
 
 class IndexPage extends React.Component {
@@ -42,8 +42,7 @@ class IndexPage extends React.Component {
   }
 
   render() {
-    const position = [this.state.lat, this.state.lng]
-
+    const mapPosition = [this.state.lat, this.state.lng]
 
     if (typeof window !== 'undefined') {
       const cameraData = this.props.data.allCamerasCsv.edges
@@ -57,7 +56,7 @@ class IndexPage extends React.Component {
             <SEO title={SITE_TITLE} keywords={SITE_TAGS} />
             <h1>Camera Locations & 911 Calls</h1>
             <p>Camera locations were collected by <a href="https://stopwatchingnola.org">stopwatchingnola.org</a></p>
-            <Map center={position} zoom={this.state.zoom} id="mapid">
+            <Map center={mapPosition} zoom={this.state.zoom} id="mapid">
               <HeatmapLayer
                 fitBoundsOnLoad
                 fitBoundsOnUpdate

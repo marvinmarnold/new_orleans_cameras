@@ -18,10 +18,21 @@ calls.clean <- calls.all %>%
     Lat = as.numeric(substring(X, 2)),
     Lng = as.numeric(substring(Y, 2, nchar(Y) -1))
   ) %>%
+  mutate(
+    Lat = case_when(
+      Lat < 0 ~ Lng,
+      TRUE ~ Lat
+    ),
+    Lng = case_when(
+      Lng < 0 ~ Lng,
+      TRUE ~ Lat
+    )
+  ) %>%
   filter(!is.na(Lat)) %>% filter(!is.na(Lng)) %>%
+  filter(Lat != 0) %>% filter(Lng != 0) %>%
   # select(NOPD_Item, TypeText, Lat, Lng) %>% 
   select(Lat, Lng) %>%
-  sample_frac(sample.frac)
+  sample_frac(size = sample.frac)
 
 #colnames(calls.clean) <- c("Item Number", "Description", "Lat", "Lng")
 colnames(calls.clean) <- c("Lat", "Lng")
